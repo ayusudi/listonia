@@ -106,7 +106,7 @@
 
                             </div>
                             <button id="todoButtonCreate" data-toggle="modal" class="btn btn-dark mb-3"
-                                data-target="#ModalCreateInGroup">Create
+                                data-target="#ModalCreateInGroup" onclick="showformGroup()">Create
                                 Todo</button>
                         </div>
                     </div>
@@ -137,22 +137,11 @@
                             </button>
                         </div>
                         <div id="createTodo" class="modal-body">
-                            <form id="createTodo">
-                                <label>Title</label>
-                                <input type="text" class="form-control" id="input-title-p" placeholder="Title"
-                                    required="true">
-                                <label>Description</label>
-                                <textarea class="form-control" id="input-description-p" rows="3" required="true"
-                                    placeholder="description"></textarea>
-                                <div class="form-group">
-                                    <label>Due Date</label>
-                                    <input type="date" class="form-control" id="input-dueDate-p"
-                                        required="true">
-                                </div>
-                                <button type="submit" class="btn btn-dark mt-4 mb-3 mx-1" data-dismiss="modal"
-                                    onclick="createTodoInGroup()">Submit</button>
+                            <div id="inGroup">
+
+                            </div>
+  
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -172,21 +161,9 @@
                     </button>
                 </div>
                 <div id="createTodo" class="modal-body">
-                    <form id="createTodo-s">
-                        <label>Title</label>
-                        <input type="text" class="form-control" id="input-title" placeholder="Title" required="true">
-                        <label>Description</label>
-                        <textarea class="form-control" id="input-description" rows="3" required="true"
-                            placeholder="description"></textarea>
-                        <div class="form-group">
-                            <label>Due Date</label>
-                            <input type="date" class="form-control" id="input-dueDate" required="true">
+                        <div  id="createTodo-s">
+
                         </div>
-                        <div class="form-group d-flex justify-content-end">
-                            <button type="submit" class="btn btn-dark mt-4 mb-3 mx-1" data-dismiss="modal"
-                                onclick="createTodo()">Submit</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

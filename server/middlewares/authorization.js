@@ -22,6 +22,8 @@ function authorization(req, res, next){
   })
 }
 
+
+
 function authzProject(req, res, next){
   Project.findById(req.params.projectId)
   .then(result =>{

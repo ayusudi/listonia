@@ -72,6 +72,23 @@ function getProjectTodos(id) {
     })
 }
 
+function getDeadlineG(date) {
+  let day = 24 * 3600 * 1000
+  let today = new Date().getTime()
+  let dueDate = new Date(date).getTime()
+  let difference = Math.floor((dueDate - today) / day)
+  if (difference < -1) {
+    return `<p style="color:red">It's already pass ${Math.abs(difference)} days</p>`
+  } else if (difference === -1 || difference === 0) {
+    return '<p style="color:green">Today</p>'
+  } else {
+    return `<p style="color:green">${difference} days left</p>`
+  }
+}
+
+
+
+
 function todosofGroup(id) {
   axios({
     method: 'get',
@@ -85,6 +102,7 @@ function todosofGroup(id) {
       $(`.done-group`).empty()
       $(`.undone-group`).empty()
       todos.forEach(el => {
+        let getDaysLeft = getDeadlineG(el.dueDate)
         // console.log(el, '????');
         if (!el.status) {
           $('.undone-group').append(`
@@ -93,7 +111,7 @@ function todosofGroup(id) {
                   <h4>${el.name}</h4>
                   <p class="m-width">${el.description} <br>
                   <b>created by:</b> ${el.user.name}</p>
-                  <p>${el.dueDate}</p>
+                  <b>${getDaysLeft}</b>
                 </article>
                 <aside class="d-flex justify-content-end align-items-center m-2">
                   <button class="btn btn-soft btn-circle" onclick="patchTodoGroup('${el._id}', true)"><i class="fas fa-check" ></i></button>
@@ -109,7 +127,7 @@ function todosofGroup(id) {
                     <article class="px-2 py-2">
                       <h4>${el.name}</h4>
                       <p class="m-width">${el.description} <br><b>created by:</b> ${el.user.name}</p>
-                      <p>${el.dueDate}</p>
+                      <b>${getDaysLeft}</b>
                     </article>
                     <aside class="d-flex justify-content-end align-items-center m-2">
                       <button class="btn btn-yel btn-circle" onclick="patchTodoGroup('${el._id}', false)"><i class="fas fa-undo-alt"></i></button>

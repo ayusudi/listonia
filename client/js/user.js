@@ -102,8 +102,23 @@ function isLogin() {
   $('.todo.default').show()
 }
 
+function getDeadline(date) {
+  let day = 24 * 3600 * 1000
+  let today = new Date().getTime()
+  let dueDate = new Date(date).getTime()
+  let difference = Math.floor((dueDate - today) / day)
+  if (difference < 0) {
+    return `<p style="color:red">It's already pass ${Math.abs(difference)} days</p>`
+  } else if (difference === 0) {
+    return '<p style="color:green">Today</p>'
+  } else {
+    return `<p style="color:green">${difference} days left</p>`
+  }
+}
+
+
 function personalTodo(){
-  
+  console.log('heree');
   $('.done-personal').empty()
   $('.undone-personal').empty()
   axios({
@@ -117,6 +132,9 @@ function personalTodo(){
       let todos = data.todos
       if (todos.length > 0) {
         todos.forEach(el => {
+          let getDaysLeft = getDeadline(el.dueDate)
+          console.log(getDaysLeft);
+          let dueDate = new Date(el.dueDate).toDateString()
           if (el.status){
             $('.done-personal').append(
               `  
@@ -124,7 +142,7 @@ function personalTodo(){
               <article class="px-2 py-2">
                 <h4>${el.name}</h4>
                 <p class="m-width">${el.description}</p>
-                <p>${el.dueDate}</p>
+                <b>${getDaysLeft}</b>
               </article>
               <aside class="d-flex justify-content-end align-items-center m-2">
                 <button class="btn btn-yel btn-circle" onclick="changeStatus('${el._id}', false)"><i class="fas fa-undo-alt"></i></button>
@@ -143,7 +161,7 @@ function personalTodo(){
                 <article class="px-2 py-2">
                   <h4>${el.name}</h4>
                   <p class="m-width">${el.description}</p>
-                  <p>${el.dueDate}</p>
+                  <b>${getDaysLeft}</b>
                 </article>
                 <aside class="d-flex justify-content-end align-items-center m-2">
                   <button class="btn btn-soft btn-circle"><i class="fas fa-check" onclick="changeStatus('${el._id}', true)"></i></button>

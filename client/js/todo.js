@@ -117,6 +117,17 @@ function getJoke() {
 }
 
 function todoDetails(id) {
+  let date = new Date()
+      let bulan = date.getMonth() + 1
+      let tanggal = date.getDate()
+      if (tanggal<10){
+        tanggal = '0'+tanggal.toString()
+      }
+      if (bulan <10){
+        bulan = '0'+bulan.toString()
+      }
+      let formatDate = date.getFullYear()+ "-" + bulan + "-" +  tanggal
+   
   $('#editTodo').empty()
   axios({
     method: 'get',
@@ -127,7 +138,17 @@ function todoDetails(id) {
   })
     .then(({ data }) => {
       let todo = data.todo
-      let duedate = new Date(todo.dueDate).toLocaleDateString()
+      let date1 = new Date(todo.dueDate)
+      let bulan = date1.getMonth() + 1
+      let tanggal = date1.getDate()
+      if (tanggal<10){
+        tanggal = '0'+tanggal.toString()
+      }
+      if (bulan <10){
+        bulan = '0'+bulan.toString()
+      }
+      let datev = date1.getFullYear()+ "-" + bulan + "-" +  tanggal
+   
       // console.log(duedate);
       $('#editTodo').append(`
       <label>Title</label>
@@ -138,8 +159,8 @@ function todoDetails(id) {
         >${todo.description}</textarea>
       <div class="form-group">
         <label>Due Date</label>
-          <input type="date" class="form-control" id="inputDueDateUpdate"
-            value="${duedate})}" required>
+          <input type="date" min="${formatDate}" class="form-control" id="inputDueDateUpdate"
+            value="${datev}" placeholder="${datev}" required>
       </div>
       <div class="form-group d-flex justify-content-end">
           <button type="submit" class="btn btn-dark mt-4 mb-3 mx-1" data-dismiss="modal"

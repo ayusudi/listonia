@@ -5,7 +5,6 @@ const projectSchema = new Schema({
     name:{
         type: String,
         required: [true, 'Missing Project name'],
-        // maxlength: [10, 'Maximum project name is 10 characters']
     } ,
     owner:{
         type: mongoose.Schema.Types.ObjectId,
