@@ -11,7 +11,7 @@ function sendform(){
       let formatDate = date.getFullYear()+ "-" + bulan + "-" +  tanggal
     $('#createTodo-s').empty()
     $('#createTodo-s').append(`
-    <label>Title i</label>
+    <label>Title</label>
     <input type="text" class="form-control" id="input-title" placeholder="Title" required="true">
     <label>Description</label>
     <textarea class="form-control" id="input-description" rows="3" required="true"

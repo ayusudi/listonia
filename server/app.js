@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 
 
-mongoose.connect('mongodb://localhost:27017/listonia', {
+mongoose.connect(process.env.ATLAS, {
     useNewUrlParser : true , useUnifiedTopology: true 
 }, function(err){
     if(err) {
