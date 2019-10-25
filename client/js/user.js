@@ -1,4 +1,4 @@
-let baseUrl = 'http://localhost:3000'
+let baseUrl = 'http://35.240.165.74'
 $(document).ready(function () {
   if (localStorage.getItem('token')) {
     isLogin()

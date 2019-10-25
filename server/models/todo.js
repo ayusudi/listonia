@@ -16,7 +16,8 @@ const todoSchema = Schema({
   },
   dueDate : {
     type : Date,
-    required: [true, 'Due date is required']
+    required: [true, 'Due date is required'],
+    min : [new Date(), `Not allowed to choose pass date`]
   },
   user : {
     type : mongoose.Schema.Types.ObjectId,
